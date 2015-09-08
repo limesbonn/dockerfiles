@@ -14,13 +14,13 @@ WORKDIR /bin
 # Download TopHat2
 RUN wget http://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.0.Linux_x86_64.tar.gz
 # Download Bowtie2
-RUN wget --default-page=bowtie2-2.2.3-linux-x86_64.zip http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.6/bowtie2-2.2.6-linux-x86_64.zip/
+RUN wget --default-page=bowtie2-2.2.6-linux-x86_64.zip http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.6/bowtie2-2.2.6-linux-x86_64.zip/
 # Unzip the archive
 RUN tar zxvf tophat-2.1.0.Linux_x86_64.tar.gz
 # Remove the archive
 RUN rm tophat-2.1.0.Linux_x86_64.tar.gz
 # Unzip the archive
-RUN unzip bowtie2-2.2.3-linux-x86_64.zip
+RUN unzip bowtie2-2.2.6-linux-x86_64.zip
 # Remove the archive
 RUN rm bowtie2-2.2.6-linux-x86_64.zip
 # Working directory in Bowtie2
