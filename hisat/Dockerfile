@@ -10,7 +10,7 @@ FROM ubuntu:14.04
 MAINTAINER Hartmut Schultze 
 
 # Update the repository sources list
-RUN apt-get update
+RUN apt-get update  && apt-get -y install samtools=0.1.19-1 
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
