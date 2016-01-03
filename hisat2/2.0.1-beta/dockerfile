@@ -10,18 +10,10 @@ FROM ubuntu:14.04
 MAINTAINER Hartmut Schultze
 
 # Update the repository sources list
-# Remain current
-RUN apt-get update 
+RUN apt-get update
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
-
-# samtools
-RUN cd /usr/local/bin && \
-git clone --branch=develop git://github.com/samtools/samtools.git && \
-cd /usr/local/bin/samtools && \
-make && \
-make install    
 
 # Install hisat2
 WORKDIR /tmp
@@ -38,19 +30,8 @@ RUN rm -rf /tmp/hisat2
 RUN apt-get clean
 RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
 
-#Cleanup the temp dir
-RUN rm -rvf /tmp/*
-
-#Clean up APT when done.
-RUN apt-get clean && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-apt-get remove -y asciidoc && \
-apt-get autoclean && \
-apt-get autoremove -y && \
-rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-
 # Set default working path
 WORKDIR /root
 
 # Default command to execute at startup of the container
-CMD hisat2 
+CMD hisat2
