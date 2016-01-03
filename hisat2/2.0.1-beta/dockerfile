@@ -13,15 +13,15 @@ MAINTAINER Hartmut Schultze
 # Remain current
 RUN apt-get update 
 
+# Install compiler and perl stuff
+RUN apt-get install --yes build-essential git
+
 # samtools
 RUN cd /usr/local/bin && \
 git clone --branch=develop git://github.com/samtools/samtools.git && \
 cd /usr/local/bin/samtools && \
 make && \
 make install    
-
-# Install compiler and perl stuff
-RUN apt-get install --yes build-essential git
 
 # Install hisat2
 WORKDIR /tmp
