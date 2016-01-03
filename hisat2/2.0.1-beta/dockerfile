@@ -11,19 +11,14 @@ MAINTAINER Hartmut Schultze
 
 # Update the repository sources list
 # Remain current
-RUN apt-get update &&  apt-get upgrade -y && apt-get dist-upgrade -y && apt-get install -y ldc asciido
+RUN apt-get update 
 
-#make pipeline install dirs
-RUN mkdir /usr/local/pipeline && \
-  chown pipeman:ngsgroup /usr/local/pipeline && \
-  chmod 775 /usr/local/pipeline
-  
 # samtools
-RUN cd /usr/local/pipeline && \
-    git clone --branch=develop git://github.com/samtools/samtools.git && \
-    cd /usr/local/pipeline/samtools && \
-    make && \
-    make install    
+RUN cd /usr/local/bin && \
+git clone --branch=develop git://github.com/samtools/samtools.git && \
+cd /usr/local/bin/samtools && \
+make && \
+make install    
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
@@ -48,13 +43,11 @@ RUN rm -rvf /tmp/*
 
 #Clean up APT when done.
 RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    apt-get remove -y asciidoc && \
-    apt-get autoclean && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-    rm -rf /usr/local/pipeline/*
-
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+apt-get remove -y asciidoc && \
+apt-get autoclean && \
+apt-get autoremove -y && \
+rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
 
 # Set default working path
 WORKDIR /root
