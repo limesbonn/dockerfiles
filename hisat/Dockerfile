@@ -7,7 +7,7 @@
 FROM ubuntu:14.04
 
 # File Author / Maintainer
-MAINTAINER Kathrin Klee
+MAINTAINER Hartmut Schultze 
 
 # Update the repository sources list
 RUN apt-get update
