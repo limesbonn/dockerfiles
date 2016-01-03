@@ -55,4 +55,4 @@ RUN apt-get clean && \
 WORKDIR /root
 
 # Default command to execute at startup of the container
-CMD hisat2
+CMD hisat2 
