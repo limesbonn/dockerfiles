@@ -1,13 +1,13 @@
 ############################################################
-# Dockerfile to build HISAT container images
+# Dockerfile to build hisat2 container images
 # Based on Ubuntu
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu
+FROM ubuntu:14.04
 
 # File Author / Maintainer
-MAINTAINER Kathrin Klee
+MAINTAINER Hartmut Schultze
 
 # Update the repository sources list
 RUN apt-get update
@@ -15,18 +15,18 @@ RUN apt-get update
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
 
-# Install HISAT
+# Install hisat2
 WORKDIR /tmp
-RUN git clone https://github.com/infphilo/hisat.git
-WORKDIR /tmp/hisat
+RUN git clone https://github.com/infphilo/hisat2.git
+WORKDIR /tmp/hisat2
 RUN git checkout master
 
 # Compile
 RUN make
-RUN cp -p hisat hisat-* /usr/local/bin
+RUN cp -p hisat2 hisat2-* /usr/local/bin
 
 # Cleanup
-RUN rm -rf /tmp/hisat
+RUN rm -rf /tmp/hisat2
 RUN apt-get clean
 RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
 
@@ -34,4 +34,4 @@ RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-d
 WORKDIR /root
 
 # Default command to execute at startup of the container
-CMD hisat
+CMD hisat2
