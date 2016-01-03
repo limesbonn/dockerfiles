@@ -15,10 +15,31 @@ RUN apt-get update
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
 
+#-------------------------------Add user----------------------------------------------------------------------------------#
+# Create a pipeline user:pipeman and group:ngsgroup
+
+RUN useradd -m -s /bin/bash pipeman && \
+  cd /home/pipeman && \
+  echo "#bash config file for user pipeman" >> /home/pipeman/.bashrc
+
+RUN groupadd ngsgroup && \
+  usermod -aG ngsgroup pipeman && \
+  usermod -aG sudo pipeman
+
+#-----------------------------NGS TOOLS DIRECTORY------------------------------------------------------------------------#  
+#make pipeline install dirs
+RUN mkdir /usr/local/pipeline && \
+  chown pipeman:ngsgroup /usr/local/pipeline && \
+  chmod 775 /usr/local/pipeline
+  
+#-------------------------------PERMISSIONS--------------------------
+RUN chmod -R 777 /usr/local/pipeline 
+RUN chown -R pipeman:ngsgroup /usr/local/pipeline
+
 # samtools
-RUN cd /usr/local/bin && \
+RUN cd /usr/local/pipeline && \
 git clone --branch=develop git://github.com/samtools/samtools.git && \
-cd /usr/local/bin/samtools && \
+cd /usr/local/pipeline/samtools && \
 make && \
 make install 
 
