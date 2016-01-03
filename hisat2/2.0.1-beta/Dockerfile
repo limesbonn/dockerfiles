@@ -17,10 +17,10 @@ RUN apt-get install --yes build-essential git
 
 # samtools
 RUN cd /usr/local/bin && \
-    git clone --branch=develop git://github.com/samtools/samtools.git && \
-    cd /usr/local/bin/samtools && \
-    make && \
-    make install 
+git clone --branch=develop git://github.com/samtools/samtools.git && \
+cd /usr/local/bin/samtools && \
+make && \
+make install 
 
 # Install hisat2
 WORKDIR /tmp
@@ -36,13 +36,6 @@ RUN cp -p hisat2 hisat2-* /usr/local/bin
 RUN rm -rf /tmp/hisat2
 RUN apt-get clean
 RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
-
-#Clean up APT when done.
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    apt-get autoclean && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
 
 # Set default working path
 WORKDIR /root
