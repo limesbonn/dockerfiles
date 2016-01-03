@@ -10,48 +10,10 @@ FROM ubuntu:14.04
 MAINTAINER Hartmut Schultze
 
 # Update the repository sources list
-RUN apt-get update
+RUN apt-get update && apt-get -y install samtools=0.1.19-1
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
-
-#-------------------------------Add user----------------------------------------------------------------------------------#
-# Create a pipeline user:pipeman and group:ngsgroup
-
-RUN useradd -m -s /bin/bash pipeman && \
-  cd /home/pipeman && \
-  echo "#bash config file for user pipeman" >> /home/pipeman/.bashrc
-
-RUN groupadd ngsgroup && \
-  usermod -aG ngsgroup pipeman && \
-  usermod -aG sudo pipeman
-
-#-----------------------------NGS TOOLS DIRECTORY------------------------------------------------------------------------#  
-#make pipeline install dirs
-RUN mkdir /usr/local/pipeline && \
-  chown pipeman:ngsgroup /usr/local/pipeline && \
-  chmod 775 /usr/local/pipeline
-  
-#-------------------------------PERMISSIONS--------------------------
-RUN chmod -R 777 /usr/local/pipeline 
-RUN chown -R pipeman:ngsgroup /usr/local/pipeline
-
-# samtools, htslib, bcftools
-RUN cd /usr/local/pipeline && \
-    git clone --branch=develop git://github.com/samtools/htslib.git && \
-    git clone --branch=develop git://github.com/samtools/bcftools.git && \
-    git clone --branch=develop git://github.com/samtools/samtools.git && \
-    cd /usr/local/pipeline/htslib && \
-    autoconf && \
-    ./configure  && \
-    make && \
-    make install && \
-    cd /usr/local/pipeline/bcftools && \
-    make && \
-    make install && \
-    cd /usr/local/pipeline/samtools && \
-    make install    
-    make && \
 
 # Install hisat2
 WORKDIR /tmp
