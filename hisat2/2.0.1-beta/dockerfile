@@ -1,0 +1,58 @@
+############################################################
+# Dockerfile to build hisat2 container images
+# Based on Ubuntu
+############################################################
+
+# Set the base image to Ubuntu
+FROM ubuntu:14.04
+
+# File Author / Maintainer
+MAINTAINER Hartmut Schultze
+
+# Update the repository sources list
+# Remain current
+RUN apt-get update &&  apt-get upgrade -y && apt-get dist-upgrade -y && apt-get install -y ldc asciido
+
+# samtools
+RUN cd /usr/local/pipeline && \
+    git clone --branch=develop git://github.com/samtools/samtools.git && \
+    cd /usr/local/pipeline/samtools && \
+    make && \
+    make install    
+
+# Install compiler and perl stuff
+RUN apt-get install --yes build-essential git
+
+# Install hisat2
+WORKDIR /tmp
+RUN git clone https://github.com/infphilo/hisat2.git
+WORKDIR /tmp/hisat2
+RUN git checkout master
+
+# Compile
+RUN make
+RUN cp -p hisat2 hisat2-* /usr/local/bin
+
+# Cleanup
+RUN rm -rf /tmp/hisat2
+RUN apt-get clean
+RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
+
+#Cleanup the temp dir
+RUN rm -rvf /tmp/*
+
+#Clean up APT when done.
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    apt-get remove -y asciidoc && \
+    apt-get autoclean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
+    rm -rf /usr/local/pipeline/*
+
+
+# Set default working path
+WORKDIR /root
+
+# Default command to execute at startup of the container
+CMD hisat2
