@@ -36,12 +36,22 @@ RUN mkdir /usr/local/pipeline && \
 RUN chmod -R 777 /usr/local/pipeline 
 RUN chown -R pipeman:ngsgroup /usr/local/pipeline
 
-# samtools
+# samtools, htslib, bcftools
 RUN cd /usr/local/pipeline && \
-git clone --branch=develop git://github.com/samtools/samtools.git && \
-cd /usr/local/pipeline/samtools && \
-make && \
-make install 
+    git clone --branch=develop git://github.com/samtools/htslib.git && \
+    git clone --branch=develop git://github.com/samtools/bcftools.git && \
+    git clone --branch=develop git://github.com/samtools/samtools.git && \
+    cd /usr/local/pipeline/htslib && \
+    autoconf && \
+    ./configure  && \
+    make && \
+    make install && \
+    cd /usr/local/pipeline/bcftools && \
+    make && \
+    make install && \
+    cd /usr/local/pipeline/samtools && \
+    make install    
+    make && \
 
 # Install hisat2
 WORKDIR /tmp
