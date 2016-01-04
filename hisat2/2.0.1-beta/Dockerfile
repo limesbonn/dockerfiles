@@ -10,10 +10,19 @@ FROM ubuntu:14.04
 MAINTAINER Hartmut Schultze
 
 # Update the repository sources list
-RUN apt-get update && apt-get -y install samtools=0.1.19-1
+RUN apt-get update  && apt-get -y install samtools=0.1.19-1 && apt-get install -y wget
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
+
+# get NBCI Toolkit
+WORKDIR /tmp
+RUN wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/ngs/1.2.3/ngs-sdk.1.2.3-linux.tar.gz" && \
+    tar zxfv ngs-sdk.1.2.3-linux.tar.gz
 
 # Install hisat2
 WORKDIR /tmp
@@ -22,7 +31,7 @@ WORKDIR /tmp/hisat2
 RUN git checkout master
 
 # Compile
-RUN make
+RUN make USE_SRA=1 NCBI_NGS_DIR=/tmp/ngs-sdk.1.2.3-linux NCBI_VDB_DIR=/tmp/ngs-sdk.1.2.3-linux
 RUN cp -p hisat2 hisat2-* /usr/local/bin
 
 # Cleanup
