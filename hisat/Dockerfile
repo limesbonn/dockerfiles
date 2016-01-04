@@ -15,6 +15,12 @@ RUN apt-get update  && apt-get -y install samtools=0.1.19-1
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
 
+# clone repo sra-toolkit
+WORKDIR /src
+RUN wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.5.7/sratoolkit.2.5.7-ubuntu64.tar.gz" && \
+    tar zxfv sratoolkit.2.5.7-ubuntu64.tar.gz && \
+    cp -r sratoolkit.2.5.7-ubuntu64/bin/* /usr/bin
+
 # Install HISAT
 WORKDIR /tmp
 RUN git clone https://github.com/infphilo/hisat.git
