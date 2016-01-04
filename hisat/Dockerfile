@@ -16,6 +16,8 @@ RUN apt-get update  && apt-get -y install samtools=0.1.19-1 && apt-get install -
 RUN apt-get install --yes build-essential git
 
 ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
 
 # get NBCI Toolki
 WORKDIR /tmp
