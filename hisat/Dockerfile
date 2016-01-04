@@ -15,6 +15,8 @@ RUN apt-get update  && apt-get -y install samtools=0.1.19-1 && apt-get install -
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
 
+ENV LANG en_US.UTF-8
+
 # clone repo sra-toolkit
 WORKDIR /src
 RUN wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.5.7/sratoolkit.2.5.7-ubuntu64.tar.gz" && \
