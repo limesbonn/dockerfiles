@@ -17,11 +17,10 @@ RUN apt-get install --yes build-essential git
 
 ENV LANG en_US.UTF-8
 
-# clone repo sra-toolkit
-WORKDIR /src
-RUN wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.5.7/sratoolkit.2.5.7-ubuntu64.tar.gz" && \
-    tar zxfv sratoolkit.2.5.7-ubuntu64.tar.gz && \
-    cp -r sratoolkit.2.5.7-ubuntu64/bin/* /usr/bin
+# get NBCI Toolki
+WORKDIR /tmp
+RUN wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/ngs/1.2.3/ngs-sdk.1.2.3-linux.tar.gz" && \
+    tar zxfv ngs-sdk.1.2.3-linux.tar.gz
 
 # Install HISAT
 WORKDIR /tmp
@@ -30,7 +29,7 @@ WORKDIR /tmp/hisat
 RUN git checkout master
 
 # Compile
-RUN make
+RUN make USE_SRA=1 NCBI_NGS_DIR=/tmp/ngs-sdk.1.2.3-linux NCBI_VDB_DIR=/tmp/ngs-sdk.1.2.3-linux
 RUN cp -p hisat hisat-* /usr/local/bin
 
 # Cleanup
