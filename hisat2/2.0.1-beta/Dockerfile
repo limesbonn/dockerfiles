@@ -9,14 +9,22 @@ FROM ubuntu:14.04
 # File Author / Maintainer
 MAINTAINER Hartmut Schultze
 
+# Configure default locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && locale-gen en_US.utf8 \
+    && /usr/sbin/update-locale LANG=en_US.UTF-8
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+
 # Update the repository sources list
 RUN apt-get update  && apt-get -y install samtools=0.1.19-1 && apt-get install -y wget
 
 # Install compiler and perl stuff
 RUN apt-get install --yes build-essential git
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en  
+#ENV LANG en_US.UTF-8
+#ENV LANGUAGE en_US:en  
 
 # get NBCI Toolkit
 WORKDIR /tmp
