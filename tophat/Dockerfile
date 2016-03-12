@@ -8,7 +8,14 @@ FROM ubuntu:14.04
 # File/Author / Maintainer
 MAINTAINER Hartmut Schultze 
 # Update the repository sources list, install wget, unzip, python
-RUN apt-get update && apt-get install --yes wget unzip python
+RUN apt-get update && apt-get install --yes wget unzip \
+   build-essential \
+   curl \
+   python \ 
+   python2.7-dev \
+   python-pip \
+   python-numpy \
+   python-matplotlib 
 # Working directory in /bin
 WORKDIR /bin
 # Download TopHat2
