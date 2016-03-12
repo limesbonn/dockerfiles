@@ -21,7 +21,14 @@ ENV LANG en_US.UTF-8
 RUN apt-get update  && apt-get -y install samtools=0.1.19-1 && apt-get install -y wget
 
 # Install compiler and perl stuff
-RUN apt-get install --yes build-essential git
+RUN apt-get install --yes build-essential git \
+   build-essential \
+   curl \
+   python \ 
+   python2.7-dev \
+   python-pip \
+   python-numpy \
+   python-matplotlib 
 
 #ENV LANG en_US.UTF-8
 #ENV LANGUAGE en_US:en  
