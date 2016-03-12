@@ -44,6 +44,7 @@ RUN cp -p hisat hisat-* /usr/local/bin
 # Cleanup
 RUN rm -rf /tmp/hisat
 
+WORKDIR /tmp
 #Install HtSeq
 RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=b7f4f38a9f4278b9b7f948d1efbc1f05 > HTSeq-0.6.1.tar.gz && \
    tar -xzf HTSeq-0.6.1.tar.gz && \
