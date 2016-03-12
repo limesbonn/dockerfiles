@@ -31,6 +31,7 @@ RUN ln -s bowtie2 bowtie
 ENV PATH $PATH:/bin/tophat-2.1.0.Linux_x86_64
 ENV PATH $PATH:/bin/bowtie2-2.2.6
 
+WORKDIR /tmp
 #Install HtSeq
 RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=b7f4f38a9f4278b9b7f948d1efbc1f05 > HTSeq-0.6.1.tar.gz && \
    tar -xzf HTSeq-0.6.1.tar.gz && \
