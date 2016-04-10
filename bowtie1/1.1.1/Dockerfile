@@ -17,7 +17,7 @@ RUN apt-get install --yes build-essential gcc-multilib apt-utils zlib1g-dev git 
    python-pip \
    python-numpy \
    python-matplotlib \
-   wget \
+   wget 
 
 # Install STAR
 WORKDIR /tmp
