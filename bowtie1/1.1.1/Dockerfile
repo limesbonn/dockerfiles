@@ -17,7 +17,8 @@ RUN apt-get install --yes build-essential gcc-multilib apt-utils zlib1g-dev git 
    python-pip \
    python-numpy \
    python-matplotlib \
-   wget 
+   wget \
+   r-base r-base-dev r-recommended littler
 
 # Install STAR
 WORKDIR /tmp
@@ -42,6 +43,8 @@ RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=
    ls && \ 
    python setup.py install --user
 
+#install R
+RUN ln -s /usr/share/doc/littler/examples/install.r /usr/local/bin/install.r
 
 RUN apt-get clean
 RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
