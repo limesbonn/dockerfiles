@@ -44,6 +44,7 @@ RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=
 
 # install R packages
 RUN Rscript -e 'install.packages(c("data.table","dplyr"))'
+RUN cpan MCE
 
 RUN apt-get clean
 RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
