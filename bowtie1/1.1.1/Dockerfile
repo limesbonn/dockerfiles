@@ -9,8 +9,7 @@ MAINTAINER Hartmut Schultze
 # Update the repository sources list
 RUN apt-get update 
 # Install compiler and perl stuff
-RUN apt-get install -f --yes build-essential gcc-multilib apt-utils zlib1g-dev git fastx-toolkit \
-   build-essential \
+RUN apt-get install -f --yes gcc-multilib apt-utils git fastx-toolkit \
    curl \
    python \ 
    python2.7-dev \
@@ -18,6 +17,8 @@ RUN apt-get install -f --yes build-essential gcc-multilib apt-utils zlib1g-dev g
    python-numpy \
    python-matplotlib \
    wget 
+
+# build-essential zlib1g-dev 
 
 # Install STAR
 WORKDIR /tmp
