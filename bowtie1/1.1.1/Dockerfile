@@ -9,7 +9,7 @@ MAINTAINER Hartmut Schultze
 # Update the repository sources list
 RUN apt-get update 
 # Install compiler and perl stuff
-RUN apt-get install --yes gcc-5-multilib gcc-multilib apt-utils git fastx-toolkit \
+RUN apt-get install --yes gcc-multilib apt-utils git fastx-toolkit \
    build-essential \
    curl \
    python \ 
