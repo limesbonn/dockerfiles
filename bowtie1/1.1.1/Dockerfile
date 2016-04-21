@@ -9,15 +9,13 @@ MAINTAINER Hartmut Schultze
 # Update the repository sources list
 RUN apt-get update 
 # Install compiler and perl stuff
-RUN apt-get install --yes gcc-multilib apt-utils git fastx-toolkit \
-   build-essential \
+RUN apt-get install --yes gcc-multilib gcc-5-multilib libx32gcc-5-dev lib32gcc-5-dev libc6-dev-x32 libc6-dev-i386 zlib1g-dev apt-utils git fastx-toolkit \
    curl \
    python \ 
    python2.7-dev \
    python-pip \
    python-numpy \
    python-matplotlib \
-   wget 
 
 # Install STAR
 WORKDIR /tmp
