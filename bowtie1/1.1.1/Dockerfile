@@ -15,7 +15,7 @@ RUN apt-get install --yes gcc-multilib gcc-5-multilib libx32gcc-5-dev lib32gcc-5
    python2.7-dev \
    python-pip \
    python-numpy \
-   python-matplotlib \
+   python-matplotlib
 
 # Install STAR
 WORKDIR /tmp
