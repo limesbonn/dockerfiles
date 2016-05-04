@@ -49,6 +49,6 @@ RUN cpan MCE
 RUN cpan MCE:Shared
 
 RUN apt-get clean
-RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
+RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim
 WORKDIR /root
 CMD ["/bin/bash"]
