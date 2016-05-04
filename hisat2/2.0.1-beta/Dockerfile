@@ -61,7 +61,7 @@ RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=
    python setup.py install --user
 
 RUN apt-get clean
-RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim git
+RUN apt-get remove --yes --purge build-essential gcc-multilib apt-utils zlib1g-dev vim
 
 # Set default working path
 WORKDIR /root
