@@ -44,7 +44,7 @@ RUN curl https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1.tar.gz#md5=
    python setup.py install --user
 
 # install R packages
-RUN Rscript -e 'install.packages(c("data.table","dplyr"))'
+RUN Rscript -e 'install.packages(c("data.table","dplyr","parallel"))'
 RUN cpan MCE
 RUN cpan MCE:Shared
 
