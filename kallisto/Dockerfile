@@ -29,6 +29,6 @@ RUN cmake .. && \
 
 # install sleuth
 
-RUN mkdir /docker/scripts
+RUN mkdir -p /docker/scripts
 ADD scripts /docker/scripts
 RUN Rscript /docker/scripts/install_sleuth.r
