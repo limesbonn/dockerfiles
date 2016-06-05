@@ -30,7 +30,7 @@ RUN cmake .. && \
 # install sleuth
 
 RUN echo 'source("https://bioconductor.org/biocLite.R")' > /tmp/packages.R
-#RUN echo 'biocLite("devtools")' >> /tmp/packages.R
+RUN echo 'biocLite("devtools")' >> /tmp/packages.R
 RUN echo 'biocLite("pachterlab/sleuth")' >> /tmp/packages.R
 RUN Rscript /tmp/packages.R
 
